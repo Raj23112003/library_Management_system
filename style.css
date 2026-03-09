@@ -3,6 +3,12 @@ margin:0;
 font-family:Segoe UI, sans-serif;
 }
 
+*,
+*::before,
+*::after{
+box-sizing:border-box;
+}
+
 /* NAVBAR */
 
 .navbar{
@@ -799,5 +805,97 @@ align-items:flex-start;
 
 .most-borrowed-section{
 margin:14px 12px 0;
+}
+}
+
+@media (max-width:1100px){
+.nav-search{
+width:280px;
+}
+
+.actions-container{
+gap:20px;
+}
+
+.action-card{
+width:200px;
+}
+
+.book-grid{
+padding:28px;
+gap:18px;
+}
+}
+
+@media (max-width:760px){
+.navbar{
+align-items:flex-start;
+}
+
+.nav-right{
+width:100%;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.nav-search{
+width:100%;
+}
+
+.profile-menu{
+margin-left:auto;
+}
+
+.book-grid{
+grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
+padding:18px;
+}
+
+.modal-content{
+width:calc(100% - 24px);
+max-width:340px;
+padding:20px;
+}
+
+.page-container{
+padding:0 12px;
+}
+
+.form-card{
+padding:14px;
+}
+}
+
+@media (max-width:520px){
+.navbar{
+padding:12px;
+}
+
+.brand-link{
+font-size:18px;
+}
+
+.nav-shortcut{
+font-size:12px;
+padding:5px 8px;
+}
+
+.login-box{
+width:100%;
+max-width:340px;
+padding:24px;
+}
+
+.search-box{
+width:95%;
+}
+
+.action-card{
+width:100%;
+max-width:320px;
+}
+
+.simple-list-item{
+padding:10px 12px;
 }
 }
