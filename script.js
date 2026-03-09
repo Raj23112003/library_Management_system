@@ -260,8 +260,10 @@ let dropdown = document.getElementById("profileDropdown")
 if (!dropdown) return
 
 let role = getCurrentUserType()
+let record = getCurrentUserRecord()
+let mobileMenu = window.matchMedia("(max-width: 760px)").matches
+let accountLink = { href: "profile.html", label: "Account Details" }
 let links = [
-{ href: "profile.html", label: "Account Details" },
 { href: "dashboard.html", label: "Dashboard" }
 ]
 
@@ -285,7 +287,29 @@ links.push({ href: "recommendation.html", label: "Recommendations" })
 links.push({ href: "issued.html", label: "My Borrowed Books" })
 }
 
+if (mobileMenu) {
+let navbarLinks = Array.from(document.querySelectorAll(".navbar a"))
+navbarLinks.forEach(anchor => {
+if (anchor.closest("#profileDropdown")) return
+let href = anchor.getAttribute("href")
+if (!href) return
+let label = anchor.textContent.trim()
+if (!label) return
+if (!links.some(item => item.href === href)) {
+links.push({ href, label })
+}
+})
+}
+
+if (!links.some(item => item.href === accountLink.href)) {
+links.push(accountLink)
+}
+
 dropdown.innerHTML = ""
+if (mobileMenu && record) {
+let name = record.user.fullName || record.user.username
+dropdown.innerHTML += `<div class="profile-dropdown-header">${name} (${record.user.type})</div>`
+}
 links.forEach(link => {
 dropdown.innerHTML += `<a href="${link.href}">${link.label}</a>`
 })
@@ -299,7 +323,15 @@ let record = getCurrentUserRecord()
 if (!record) return
 
 let name = record.user.fullName || record.user.username
-profileButton.innerText = `${name} (${record.user.type})`
+let label = `${name} (${record.user.type})`
+if (window.matchMedia("(max-width: 760px)").matches) {
+profileButton.innerText = ""
+profileButton.removeAttribute("title")
+} else {
+profileButton.innerText = label
+profileButton.setAttribute("title", label)
+}
+profileButton.setAttribute("aria-label", "Navigation menu")
 }
 
 function toggleProfileMenu() {
@@ -1227,6 +1259,7 @@ onclick='openBook(${JSON.stringify(title)},${JSON.stringify(author)},${JSON.stri
 async function loadHomeBooks(reset = false) {
 let grid = document.getElementById("homeBooks")
 if (!grid) return
+let loadingText = document.getElementById("homeBooksLoading")
 
 if (reset) {
 homeFeedState = { page: 1, done: false, loading: false, items: [], active: true, max: 120, seen: {} }
@@ -1242,10 +1275,12 @@ if (homeFeedState.loading || homeFeedState.done) return
 if (!homeFeedState.active) return
 
 homeFeedState.loading = true
+if (loadingText) loadingText.style.display = "block"
+
+try {
 let docs = await fetchRandomHomeBatch(24)
 if (!docs.length) {
 homeFeedState.done = true
-homeFeedState.loading = false
 return
 }
 
@@ -1267,8 +1302,11 @@ let cards = Array.from(grid.querySelectorAll(".book-card"))
 cards.slice(homeFeedState.max).forEach(card => card.remove())
 homeFeedState.done = true
 }
-
+} catch (error) {
+} finally {
 homeFeedState.loading = false
+if (loadingText) loadingText.style.display = "none"
+}
 }
 
 function loadFeaturedBooks() {
@@ -1330,6 +1368,7 @@ searchBooks()
 async function loadRecommendations(reset = false) {
 let div = document.getElementById("recommendations")
 if (!div) return
+let loadingText = document.getElementById("recommendationsLoading")
 
 if (reset) {
 recommendationFeedState = { page: 1, done: false, loading: false, items: [] }
@@ -1339,16 +1378,21 @@ div.innerHTML = ""
 if (recommendationFeedState.loading || recommendationFeedState.done) return
 
 recommendationFeedState.loading = true
+if (loadingText) loadingText.style.display = "block"
+try {
 let docs = await fetchFeedPage("bestseller", recommendationFeedState.page, 20)
 if (!docs.length) {
 recommendationFeedState.done = true
-recommendationFeedState.loading = false
 return
 }
 
 appendBookCards(div, docs)
 recommendationFeedState.page += 1
+} catch (error) {
+} finally {
 recommendationFeedState.loading = false
+if (loadingText) loadingText.style.display = "none"
+}
 }
 
 function initInfiniteScroll() {
@@ -1487,7 +1531,6 @@ loadBorrowedInfo()
 loadUsersList()
 loadStudentCreditTools()
 loadCreditHistory()
-loadRecentlyAddedBooks()
 loadRecentlyAddedBooksPage()
 loadMostBorrowedBooks()
 loadMostBorrowedBooksPage()
@@ -1496,3 +1539,7 @@ loadAllBooksStatus()
 initSearchPageFromQuery()
 initFeaturedBooksFromHash()
 applyRoleDashboard()
+
+window.addEventListener("resize", function() {
+buildProfileMenu()
+})

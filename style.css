@@ -182,8 +182,41 @@ background:#f2f5f3;
 text-decoration:none;
 }
 
+.profile-dropdown-header{
+padding:12px 14px;
+font-size:13px;
+font-weight:700;
+color:#0f3a24;
+background:#eef7f1;
+border-bottom:1px solid #dce9e1;
+}
+
 .muted-text{
 color:#666;
+}
+
+.books-loading{
+display:none;
+text-align:center;
+margin:12px 0 4px;
+font-weight:600;
+color:#155d38;
+}
+
+.books-loading::after{
+content:"";
+display:inline-block;
+width:1.4em;
+text-align:left;
+animation:loadingDots 1.2s steps(4, end) infinite;
+}
+
+@keyframes loadingDots{
+0%{content:"";}
+25%{content:".";}
+50%{content:"..";}
+75%{content:"...";}
+100%{content:"";}
 }
 
 .page-container{
@@ -828,22 +861,100 @@ gap:18px;
 }
 
 @media (max-width:760px){
+.dashboard-page #mainActions{
+display:none !important;
+}
 .navbar{
-align-items:flex-start;
+padding:10px 12px;
+gap:8px;
+align-items:center;
+flex-wrap:nowrap;
 }
 
 .nav-right{
-width:100%;
-flex-wrap:wrap;
-gap:10px;
+width:auto;
+margin-left:auto;
+flex-wrap:nowrap;
+gap:8px;
 }
 
 .nav-search{
-width:100%;
+width:min(58vw,240px);
 }
 
 .profile-menu{
-margin-left:auto;
+margin-left:0;
+order:2;
+}
+
+.nav-user-btn{
+width:36px;
+height:34px;
+padding:0;
+border-radius:8px;
+font-size:0;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.nav-user-btn::before{
+content:"\2630";
+font-size:18px;
+line-height:1;
+}
+
+.nav-search input{
+padding:8px 10px;
+font-size:13px;
+}
+
+.nav-search-results{
+top:38px;
+}
+
+.nav-left{
+width:auto;
+min-width:0;
+flex-wrap:nowrap;
+gap:8px;
+}
+
+.nav-left .nav-shortcut,
+.nav-right-link{
+display:none;
+}
+
+.brand-link{
+font-size:18px;
+white-space:nowrap;
+}
+
+.profile-dropdown{
+top:38px;
+min-width:210px;
+}
+
+.profile-menu.open .nav-user-btn{
+background:rgba(255,255,255,0.3);
+}
+
+.profile-menu.open .profile-dropdown{
+position:fixed;
+left:0;
+right:0;
+top:54px;
+width:100%;
+min-width:0;
+border-radius:0 0 14px 14px;
+max-height:calc(100vh - 54px);
+overflow:auto;
+padding:6px 0 10px;
+z-index:60;
+}
+
+.profile-menu.open .profile-dropdown a{
+padding:12px 14px;
 }
 
 .book-grid{
@@ -868,16 +979,30 @@ padding:14px;
 
 @media (max-width:520px){
 .navbar{
-padding:12px;
+padding:8px 10px;
 }
 
 .brand-link{
-font-size:18px;
+font-size:17px;
 }
 
 .nav-shortcut{
 font-size:12px;
 padding:5px 8px;
+}
+
+.nav-search{
+width:min(56vw,180px);
+}
+
+.nav-user-btn{
+width:34px;
+height:32px;
+}
+
+.profile-menu.open .profile-dropdown{
+top:48px;
+max-height:calc(100vh - 48px);
 }
 
 .login-box{
@@ -899,3 +1024,4 @@ max-width:320px;
 padding:10px 12px;
 }
 }
+

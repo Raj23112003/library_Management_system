@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="dashboard-page">
 
 <div class="navbar">
 
@@ -44,7 +44,7 @@
 Library Dashboard
 </h1>
 
-<div class="actions-container">
+<div id="mainActions" class="actions-container">
 
 <a class="action-card" href="search.html">
 <h3>Search Books</h3>
@@ -102,12 +102,8 @@ Faculty and Admin Tools
 <div id="featuredBooksSection">
 <h2 style="text-align:center;margin-top:40px">Find your book</h2>
 <p id="featuredHint" class="muted-text" style="text-align:center">Use the Featured Books link in the navbar to load featured titles.</p>
+<p id="homeBooksLoading" class="books-loading">Loading books</p>
 <div id="homeBooks" class="book-grid"></div>
-</div>
-
-<div id="recentlyAddedSection" class="recently-added-section">
-<h2 style="text-align:center;margin-top:30px">Recently Added</h2>
-<div id="recentlyAddedBooks" class="book-grid"></div>
 </div>
 
 <div id="mostBorrowedSection" class="most-borrowed-section" style="display:none">
