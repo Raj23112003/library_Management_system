@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Library Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="navbar">
+
+<div class="nav-left">
+<a class="brand-link" href="dashboard.html">Library</a>
+<a class="nav-shortcut" href="recently-added.html">Recently Added</a>
+<a class="nav-shortcut" href="most-borrowed.html">Most Borrowed</a>
+<a class="nav-shortcut" href="featured-books.html">Featured Books</a>
+</div>
+
+<div class="nav-right">
+
+<div class="nav-search">
+<input id="navSearchInput" placeholder="Search by book or genre">
+<div id="navSearchResults" class="nav-search-results"></div>
+</div>
+
+<div class="profile-menu" id="profileMenu">
+<button id="navUserBtn" class="nav-user-btn" type="button" onclick="toggleProfileMenu()"></button>
+<div class="profile-dropdown" id="profileDropdown">
+<a href="profile.html">Account Details</a>
+<a href="dashboard.html">Dashboard</a>
+<a href="search.html">Search</a>
+<a href="recommendation.html">Recommendations</a>
+<a href="issued.html">Issued Books</a>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<h1 style="text-align:center;margin-top:30px">
+Library Dashboard
+</h1>
+
+<div class="actions-container">
+
+<a class="action-card" href="search.html">
+<h3>Search Books</h3>
+<p>Find books from the library database</p>
+</a>
+
+<a id="borrowedBooksAction" class="action-card" href="issued.html">
+<h3>Borrowed Books</h3>
+<p>See books currently borrowed by users</p>
+</a>
+
+<a class="action-card" href="recommendation.html">
+<h3>Recommendations</h3>
+<p>Discover popular books</p>
+</a>
+
+<a class="action-card" href="profile.html">
+<h3>Profile</h3>
+<p>Manage your account and preferences</p>
+</a>
+
+</div>
+
+<h2 id="facultyHeading" style="text-align:center;margin-top:20px;display:none">
+Faculty and Admin Tools
+</h2>
+
+<div id="facultyActions" class="actions-container" style="display:none">
+<a class="action-card" href="search.html">
+<h3>Search Catalog</h3>
+<p>Browse books and manage records</p>
+</a>
+<a class="action-card" href="addbook.html">
+<h3>Add Book</h3>
+<p>Add custom books to your library collection</p>
+</a>
+<a class="action-card" href="remove-book.html">
+<h3>Remove Book</h3>
+<p>Remove books from custom library collection</p>
+</a>
+<a class="action-card" href="allbooks.html">
+<h3>All Books Status</h3>
+<p>View complete catalog with borrowed and available counts</p>
+</a>
+<a class="action-card" href="borrowed.html">
+<h3>Credit Distribution</h3>
+<p>Manage student borrow records and credits</p>
+</a>
+<a id="usersListAction" class="action-card" href="users.html" style="display:none">
+<h3>Users List</h3>
+<p>View faculty list and student list</p>
+</a>
+</div>
+
+<div id="featuredBooksSection">
+<h2 style="text-align:center;margin-top:40px">Find your book</h2>
+<p id="featuredHint" class="muted-text" style="text-align:center">Use the Featured Books link in the navbar to load featured titles.</p>
+<div id="homeBooks" class="book-grid"></div>
+</div>
+
+<div id="recentlyAddedSection" class="recently-added-section">
+<h2 style="text-align:center;margin-top:30px">Recently Added</h2>
+<div id="recentlyAddedBooks" class="book-grid"></div>
+</div>
+
+<div id="mostBorrowedSection" class="most-borrowed-section" style="display:none">
+<h2 style="text-align:center;margin-top:30px">Most Borrowed Books</h2>
+<div id="mostBorrowedBooks" class="book-grid most-borrowed-grid"></div>
+</div>
+
+<div id="bookModal" class="modal">
+
+<div class="modal-content">
+
+<img id="modalCover">
+
+<h2 id="modalTitle"></h2>
+
+<p id="modalAuthor"></p>
+<p id="modalGenre"></p>
+<p id="modalCredits"></p>
+<p id="modalStatus"></p>
+
+<button onclick="issueCurrentBook()">Borrow Book</button>
+<button onclick="closeModal()">Close</button>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
+
+
+
+

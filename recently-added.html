@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Recently Added Books</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="navbar">
+<div class="nav-left">
+<a class="brand-link" href="dashboard.html">Library</a>
+<a class="nav-shortcut" href="recently-added.html">Recently Added</a>
+<a class="nav-shortcut" href="most-borrowed.html">Most Borrowed</a>
+<a class="nav-shortcut" href="featured-books.html">Featured Books</a>
+</div>
+<div class="nav-right">
+<div class="nav-search">
+<input id="navSearchInput" placeholder="Search by book or genre">
+<div id="navSearchResults" class="nav-search-results"></div>
+</div>
+<div class="profile-menu" id="profileMenu">
+<button id="navUserBtn" class="nav-user-btn" type="button" onclick="toggleProfileMenu()"></button>
+<div class="profile-dropdown" id="profileDropdown"></div>
+</div>
+</div>
+</div>
+
+<div class="page-container">
+<h1>Recently Added Books</h1>
+<p class="muted-text">Books added by admin (newest first).</p>
+<div id="recentlyAddedBooksPage" class="book-grid"></div>
+</div>
+
+<div id="bookModal" class="modal">
+<div class="modal-content">
+<img id="modalCover">
+<h2 id="modalTitle"></h2>
+<p id="modalAuthor"></p>
+<p id="modalGenre"></p>
+<p id="modalCredits"></p>
+<p id="modalStatus"></p>
+<button onclick="issueCurrentBook()">Borrow Book</button>
+<button onclick="closeModal()">Close</button>
+</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+

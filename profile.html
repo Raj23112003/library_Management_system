@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>My Profile</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="navbar">
+
+<div class="nav-left">
+<a class="brand-link" href="dashboard.html">Library</a>
+<a class="nav-shortcut" href="recently-added.html">Recently Added</a>
+<a class="nav-shortcut" href="most-borrowed.html">Most Borrowed</a>
+<a class="nav-shortcut" href="featured-books.html">Featured Books</a>
+</div>
+
+<div class="nav-right">
+
+<div class="nav-search">
+<input id="navSearchInput" placeholder="Search by book or genre">
+<div id="navSearchResults" class="nav-search-results"></div>
+</div>
+
+<div class="profile-menu" id="profileMenu">
+<button id="navUserBtn" class="nav-user-btn" type="button" onclick="toggleProfileMenu()"></button>
+<div class="profile-dropdown" id="profileDropdown">
+<a href="profile.html">Account Details</a>
+<a href="dashboard.html">Dashboard</a>
+<a href="search.html">Search</a>
+<a href="recommendation.html">Recommendations</a>
+<a href="issued.html">Issued Books</a>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="profile-wrap">
+<div class="profile-card">
+<h2>Profile Options</h2>
+<p class="profile-subtitle">Update personal info, role and password.</p>
+
+<form id="profileForm" onsubmit="event.preventDefault(); saveProfile();">
+<label>Username</label>
+<input id="profileUsername" readonly>
+
+<label>School ID</label>
+<input id="profileSchoolId" readonly>
+
+<label>Full Name</label>
+<input id="profileFullName" placeholder="Enter full name">
+
+<label>Email</label>
+<input id="profileEmail" type="email" placeholder="name@example.com">
+
+<label>User Type</label>
+<input id="profileType" readonly>
+
+<label>Bio</label>
+<textarea id="profileBio" rows="4" placeholder="Write a short bio"></textarea>
+
+<label>New Password</label>
+<input id="profilePassword" type="password" placeholder="Leave blank to keep current">
+
+<div class="profile-actions">
+<button type="submit">Save Changes</button>
+<button type="button" class="danger-btn" onclick="deleteAccount()">Delete Account</button>
+</div>
+
+<button type="button" onclick="logout()">Logout</button>
+</form>
+</div>
+
+<div class="profile-card summary-card">
+<h3>Account Summary</h3>
+<div class="summary-item">
+<span>Borrowed books</span>
+<strong id="borrowedCount">0</strong>
+</div>
+<div class="summary-item">
+<span>Current credits</span>
+<strong id="currentCredits">0</strong>
+</div>
+<p class="summary-note">Students use credits to borrow books.</p>
+</div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
+
+
+
+
+
