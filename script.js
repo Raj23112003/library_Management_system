@@ -162,9 +162,29 @@ alert("School id wrong")
 return
 }
 
-if (type === "Faculty" && !(/^001-000[1-9]$/.test(schoolId) || schoolId === "001-0010")) {
-alert("School id wrong")
+if (type === "Faculty") {
+let facultyDigits = schoolId.replace(/\D/g, "")
+if (/^\d{1,3}$/.test(facultyDigits)) {
+let num = Number(facultyDigits)
+if (num >= 1 && num <= 9) {
+schoolId = String(num).padStart(3, "0")
+let schoolIdInput = document.getElementById("schoolId")
+if (schoolIdInput) {
+schoolIdInput.value = schoolId
+}
+}
+}
+
+if (!/^00[1-9]$/.test(schoolId)) {
+alert("School id wrong. Faculty IDs must be 001 to 009.")
 return
+}
+
+let facultyCount = users.filter(u => u.type === "Faculty").length
+if (facultyCount >= 9) {
+alert("Faculty registration limit reached (max 9).")
+return
+}
 }
 
 if (users.some(u => u.username === username || u.schoolId === schoolId)) {
